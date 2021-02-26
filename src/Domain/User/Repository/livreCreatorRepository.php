@@ -7,7 +7,7 @@ use PDO;
 /**
  * Repository.
  */
-class UserCreatorRepository
+class livreCreatorRepository
 {
     /**
      * @var PDO The database connection
@@ -28,26 +28,24 @@ class UserCreatorRepository
     /**
      * Insert user row.
      *
-     * @param array $user The user
+     * @param array $livre The user
      *
      * @return int The new ID
      */
-    public function insertUser(array $user): int
+    public function insertLivre(array $livre): int
     {
         $row = [
-            'username' => $user['username'],
-            'first_name' => $user['first_name'],
-            'last_name' => $user['last_name'],
-            'password' => $user['password'],
-            'email' => $user['email'],
+            'genreid' => $livre['genreid'],
+            'titre' => $livre['titre'],
+            'isbn' => $livre['isbn'],
+
         ];
 
-        $sql = "INSERT INTO users SET 
-                username=:username, 
-                first_name=:first_name, 
-                last_name=:last_name,
-                password =:password, 
-                email=:email;";
+        $sql = "INSERT INTO livres SET 
+                genreid=:genreid, 
+                titre=:titre, 
+                isbn=:isbn; 
+                ";
 
         $this->connection->prepare($sql)->execute($row);
 

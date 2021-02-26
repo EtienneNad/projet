@@ -3,17 +3,17 @@
 namespace App\Action;
 use App\Factory\LoggerFactory;
 use Psr\Log\LoggerInterface;
-use App\Domain\User\Service\UserCreator;
+use App\Domain\User\Repository\livreDeleteRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class UserCreateAction
+final class livreDeleteAction
 {
-    private $userCreator;
+    private $livreDelete;
 
-    public function __construct(UserCreator $userCreator)
+    public function __construct(livreDeleteRepository $livreDelete)
     {
-        $this->userCreator = $userCreator;
+        $this->livreDelete = $livreDelete;
     }
 
     public function __invoke(
@@ -21,18 +21,13 @@ final class UserCreateAction
         ResponseInterface $response
     ): ResponseInterface {
         // Collect input from the HTTP request
-        $data = (array)$request->getParsedBody();
-
+        $data = $request->getAttribute('id');
+        $int = (int)$data;
         // Invoke the Domain with inputs and retain the result
-        $userId = $this->userCreator->createUser($data);
-
-        // Transform the result into the JSON representation
-        $result = [
-            'user_id' => $userId
-        ];
+       $id = $this->livreDelete->DeleteLivre($int);
 
         // Build the HTTP response
-        $response->getBody()->write((string)json_encode($result));
+        $response->getBody()->write((string)json_encode($id));
 
         return $response
             ->withHeader('Content-Type', 'application/json')

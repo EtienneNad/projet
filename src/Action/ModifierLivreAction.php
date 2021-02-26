@@ -1,19 +1,19 @@
 <?php
 
 namespace App\Action;
+use App\Domain\User\Repository\ModifierLivreRepository;
 use App\Factory\LoggerFactory;
 use Psr\Log\LoggerInterface;
-use App\Domain\User\Service\UserCreator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class UserCreateAction
+final class ModifierLivreAction
 {
-    private $userCreator;
+    private $ModifierLivre;
 
-    public function __construct(UserCreator $userCreator)
+    public function __construct(ModifierLivreRepository $ModifierLivre)
     {
-        $this->userCreator = $userCreator;
+        $this->ModifierLivre = $ModifierLivre;
     }
 
     public function __invoke(
@@ -24,11 +24,11 @@ final class UserCreateAction
         $data = (array)$request->getParsedBody();
 
         // Invoke the Domain with inputs and retain the result
-        $userId = $this->userCreator->createUser($data);
+        $id = $this->ModifierLivre->ModificationLivre($data);
 
         // Transform the result into the JSON representation
         $result = [
-            'user_id' => $userId
+            'id' => $id
         ];
 
         // Build the HTTP response

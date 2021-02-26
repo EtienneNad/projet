@@ -16,7 +16,7 @@ final class HomeAction
             'success' => true, 
             'message' => 'Hello world!'
         ]);
-        
+
         $response->getBody()->write($result);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -31,6 +31,6 @@ final class HomeAction
          */
 
 
-        return $response;
+
     }
 }

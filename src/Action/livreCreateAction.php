@@ -3,17 +3,17 @@
 namespace App\Action;
 use App\Factory\LoggerFactory;
 use Psr\Log\LoggerInterface;
-use App\Domain\User\Service\UserCreator;
+use App\Domain\User\Repository\livreCreatorRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class UserCreateAction
+final class livreCreateAction
 {
-    private $userCreator;
+    private $livreCreator;
 
-    public function __construct(UserCreator $userCreator)
+    public function __construct(livreCreatorRepository $livreCreator)
     {
-        $this->userCreator = $userCreator;
+        $this->livreCreator = $livreCreator;
     }
 
     public function __invoke(
@@ -24,11 +24,11 @@ final class UserCreateAction
         $data = (array)$request->getParsedBody();
 
         // Invoke the Domain with inputs and retain the result
-        $userId = $this->userCreator->createUser($data);
+        $id = $this->livreCreator->insertLivre($data);
 
         // Transform the result into the JSON representation
         $result = [
-            'user_id' => $userId
+            'id' => $id
         ];
 
         // Build the HTTP response
