@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Auteurs;
 use App\Factory\LoggerFactory;
 use Psr\Log\LoggerInterface;
-use App\Domain\User\Repository\UserCreatorRepository;
+use App\Domain\User\Repository\Auteurs\auteursCreatorRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class UserCreateAction
+final class auteursCreateAction
 {
-    private $userCreator;
+    private $auteursCreator;
 
-    public function __construct(UserCreatorRepository $userCreator)
+    public function __construct(auteursCreatorRepository $auteursCreator)
     {
-        $this->userCreator = $userCreator;
+        $this->auteursCreator = $auteursCreator;
     }
 
     public function __invoke(
@@ -21,14 +21,14 @@ final class UserCreateAction
         ResponseInterface $response
     ): ResponseInterface {
         // Collect input from the HTTP request
-        $data = (array)$request->getParsedBody();
+        $data = $request->getParsedBody();
 
         // Invoke the Domain with inputs and retain the result
-        $userId = $this->userCreator->createUser($data);
+        $id = $this->auteursCreator->insertAuteurs($data);
 
         // Transform the result into the JSON representation
         $result = [
-            'user_id' => $userId
+            'id' => $id
         ];
 
         // Build the HTTP response

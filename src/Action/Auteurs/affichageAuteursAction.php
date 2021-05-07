@@ -1,28 +1,28 @@
 <?php
 
 
-namespace App\Action;
+namespace App\Action\Auteurs;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use App\Domain\User\Repository\affichageLivreTitreRepository;
+use App\Domain\User\Repository\Auteurs\affichageAuteursRepository;
 
-final class affichageLivreTitreAction
+final class affichageAuteursAction
 {
-    private $affichageLivreTitre;
+    private $affichageAuteurs;
 
-    public function __construct(affichageLivreTitreRepository $affichageLivreTitre)
+    public function __construct(affichageAuteursRepository $affichageAuteurs)
     {
-        $this->affichageLivreTitre= $affichageLivreTitre;
+        $this->affichageAuteurs = $affichageAuteurs;
     }
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response
     ): ResponseInterface {
-        $titre=$request->getAttribute('titre');
-        $book = $this->affichageLivreTitre->affichageLivreTitre($titre);
+
+        $titre = $this->affichageAuteurs->affichageAuteurs();
         $result = ([
-             'titre' => $book
+             'titre' => $titre
         ]);
 
         $response->getBody()->write((string)json_encode($result));

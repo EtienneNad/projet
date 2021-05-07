@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Livres;
 use App\Factory\LoggerFactory;
 use Psr\Log\LoggerInterface;
-use App\Domain\User\Repository\livreDeleteRepository;
+use App\Domain\User\Repository\Livres\livreDeleteRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

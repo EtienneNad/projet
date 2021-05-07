@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Action;
+namespace App\Action\Livres;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use App\Domain\User\Repository\affichageLivreIDRepository;
+use App\Domain\User\Repository\Livres\affichageLivreIDRepository;
 
 final class affichageLivreIDAction
 {
@@ -22,7 +22,7 @@ final class affichageLivreIDAction
         $id=$request->getAttribute('id');
         $titre = $this->affichageLivreID->affichageLivreID($id);
         $result = ([
-             'titre' => $titre
+             'auteurId' => $titre
         ]);
 
         $response->getBody()->write((string)json_encode($result));

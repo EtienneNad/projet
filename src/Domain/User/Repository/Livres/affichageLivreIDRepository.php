@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domain\User\Repository;
+namespace App\Domain\User\Repository\Livres;
 
 use PDO;
 
 /**
  * Repository.
  */
-class affichageLivreTitreRepository
+class affichageLivreIDRepository
 {
     /**
      * @var PDO The database connection
@@ -30,12 +30,11 @@ class affichageLivreTitreRepository
      *
      * @param array $livre The user
      *
-     * @return array The new ID
+     * @return int The new ID
      */
-    public function affichageLivreTitre($titre)
+    public function affichageLivreID($id)
     {
-
-        $sql = "SELECT * from livres where titre like '{$titre}%';";
+        $sql = "SELECT * from livreauteur where auteurId = $id ;";
 
 
 

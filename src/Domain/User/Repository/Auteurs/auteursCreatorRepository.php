@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domain\User\Repository;
+namespace App\Domain\User\Repository\Auteurs;
 
 use PDO;
 
 /**
  * Repository.
  */
-class livreCreatorRepository
+class auteursCreatorRepository
 {
     /**
      * @var PDO The database connection
@@ -28,23 +28,20 @@ class livreCreatorRepository
     /**
      * Insert user row.
      *
-     * @param array $livre The user
+     * @param array $auteurs The user
      *
      * @return int The new ID
      */
-    public function insertLivre(array $livre): int
+    public function insertAuteurs(array $auteurs): int
     {
         $row = [
-            'genreid' => $livre['genreid'],
-            'titre' => $livre['titre'],
-            'isbn' => $livre['isbn'],
-
+            'nom' => $auteurs['nom'],
+            'prenom' => $auteurs['prenom'],
         ];
 
-        $sql = "INSERT INTO livres SET 
-                genreid=:genreid, 
-                titre=:titre, 
-                isbn=:isbn; 
+        $sql = "INSERT INTO auteurs SET 
+                nom=:nom, 
+                prenom=:prenom;
                 ";
 
         $this->connection->prepare($sql)->execute($row);

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Livres;
 use App\Factory\LoggerFactory;
 use Psr\Log\LoggerInterface;
-use App\Domain\User\Repository\livreCreatorRepository;
+use App\Domain\User\Repository\Livres\livreCreatorRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

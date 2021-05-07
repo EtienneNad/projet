@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Action;
-use App\Domain\User\Repository\ModifierLivreRepository;
+namespace App\Action\Livres;
+use App\Domain\User\Repository\Livres\ModifierLivreRepository;
 use App\Factory\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ResponseInterface;

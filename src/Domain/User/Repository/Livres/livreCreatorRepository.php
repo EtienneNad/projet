@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domain\User\Repository;
+namespace App\Domain\User\Repository\Livres;
 
 use PDO;
 
 /**
  * Repository.
  */
-class ModifierLivreRepository
+class livreCreatorRepository
 {
     /**
      * @var PDO The database connection
@@ -32,20 +32,24 @@ class ModifierLivreRepository
      *
      * @return int The new ID
      */
-    public function ModificationLivre(array $livre): array
+    public function insertLivre(array $livre): int
     {
         $row = [
-            'id' => $livre ['id'],
             'genreid' => $livre['genreid'],
             'titre' => $livre['titre'],
             'isbn' => $livre['isbn'],
 
         ];
 
-        $sql = "UPDATE livres SET genreid=:genreid, titre=:titre, isbn=:isbn WHERE id=:id;";
+        $sql = "INSERT INTO livres SET 
+                genreid=:genreid, 
+                titre=:titre, 
+                isbn=:isbn; 
+                ";
 
         $this->connection->prepare($sql)->execute($row);
-        return $row;
+
+        return (int)$this->connection->lastInsertId();
     }
 }
 

@@ -32,13 +32,13 @@ class UserCreatorRepository
      *
      * @return int The new ID
      */
-    public function insertUser(array $user): int
+    public function createUser(array $user): int
     {
         $row = [
             'username' => $user['username'],
             'first_name' => $user['first_name'],
             'last_name' => $user['last_name'],
-            'password' => $user['password'],
+            'password' => base64_encode($user['password']),
             'email' => $user['email'],
         ];
 
@@ -47,8 +47,7 @@ class UserCreatorRepository
                 first_name=:first_name, 
                 last_name=:last_name,
                 password =:password, 
-                email=:email;";
-
+                email=:email";
         $this->connection->prepare($sql)->execute($row);
 
         return (int)$this->connection->lastInsertId();

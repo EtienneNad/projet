@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Domain\User\Repository;
+namespace App\Domain\User\Repository\Auteurs;
 
 use PDO;
 
 /**
  * Repository.
  */
-class affichageLivreRepository
+class affichageAuteursRepository
 {
     /**
      * @var PDO The database connection
@@ -28,14 +28,14 @@ class affichageLivreRepository
     /**
      * Insert user row.
      *
-     * @param array $livre The user
+     * @param array $Auteurs The user
      *
      * @return int The new ID
      */
-    public function affichageLivre()
+    public function affichageAuteurs()
     {
 
-        $sql = "SELECT * from livres ;";
+        $sql = "SELECT * from auteurs ;";
 
 
 
